@@ -1,14 +1,10 @@
 import pandas as pd
-
-def main():
-    
-    df_estudiantes = pd.read_csv("students.csv", encoding="latin1")
-
-    print(df_estudiantes)
-
-    print("Hello HIODS")
-    print("Hola")
+  
+from controller import Controller
 
 if __name__ == '__main__':
-    main()
-	
+    # df_estudiantes = pd.read_csv("docs//students.csv", encoding="latin1")
+    # print(df_estudiantes)
+
+    system = Controller()
+    system.main()
