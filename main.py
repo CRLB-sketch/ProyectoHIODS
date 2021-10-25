@@ -1,4 +1,4 @@
-from model import Model, Student, Voluntary # Para programa sin interfaz (solo en consola)
+from model import Model, Student, Voluntary, Donation # Para programa sin interfaz (solo en consola)
 
 def main():
     finish = False
@@ -10,13 +10,14 @@ def main():
         print("Menu")
         print("1. ¿Necesitas apoyo?")
         print("2. ¿Quisieras ser voluntario?")
-        print("3. ¿Te gustaría apoyar?")
+        print("3. ¿Te gustaría apoyar por medio de donaciones?")
         print("4. Ver estadísticas y datos")
         print("5. Terminar")
         option = input()
 
         # Necesitas apoyo <-------------------------------------------
         if option == "1":
+            model.add_count_visite()
 
             # Solicitar alguna información importante
             name = _check_field("nombre")
@@ -37,19 +38,26 @@ def main():
 
                 if option == '1':
                     valid = True
-                    type_help = "beca_completa"
+                    type_help = "Completa"
                 elif option == '2':
                     valid = True
-                    type_help = "beca_parcial"
+                    type_help = "Parcial"
                 elif option == '3':
                     valid = True
-                    type_help = "no_necesita_ayuda"
+                    type_help = "Cualquiera"
                 else:
                     print("Porfavor ingresa una opción válida")
                 
             # Agregar al nuevo estudiante
             new_student = Student(name, last_name, phone, email, type_help)
             print(model.add_new_student(new_student))
+
+            # Mostrar recomendaciones conforme el tipo de ayuda solicitada
+            print("\n------------------------------------------------")
+            if type_help == "Completa" or type_help == "Parcial":
+                model.show_recomendation_complete(type_help)
+            else:
+                model.show_other_recomendations()
                         
         # ¿Quisieras ser voluntario? <-------------------------------------------
         elif option == "2":
@@ -99,7 +107,45 @@ def main():
 
         # ¿Te gustaría apoyar? <-------------------------------------------------
         elif option == "3":
-            print("")
+            # Ingrear los campos
+            name = _check_field("nombre")
+            email = _check_field("correo")
+
+            # Ingresar la cantidad de denero que desea donar (si el usuario quiere)
+            money = 0
+            money_option = ""
+            while money_option != "Q":
+                money_option = input("Porfavor ingrese la cantidad de dinero que desee (si no desea/puede ingresar dinero presiona Q): ").upper()
+
+                if money_option == "Q":
+                    print("\nContinuemos\n")
+                elif money_option.isdigit():
+                    if int(money_option) <= 0:
+                        print("\n-> Solamente debes ingresar números positivos\n")
+                    else:
+                        money = int(money_option)
+                        money_option = "Q"
+                else:
+                    if len(money_option) == 0:
+                        print("\nNo ingresaste ningun dato\n")
+                    else:
+                        print("No debes de ingresar números, solamente letras")
+
+            # Obtener elementos que desee donar
+            objects_donated = ""
+            valid = False
+            while not valid:
+                element = input("Ingrese el elemento que desee donar: ").upper()
+
+                if len(element) == 0:
+                    print("\nPorfavor ingrese una opción o un elemento a donar\n")
+                elif element == "Q":
+                    print("\nContinuemos\n")
+                else:
+                    objects_donated += element + "+"
+
+            new_donation = Donation(name, email, money, objects_donated)
+            print(model.add_new_donnation(new_donation))
 
         # Estadísticas y datos <-------------------------------------------------
         elif option == "4":
