@@ -203,15 +203,5 @@ def _see_statics(model : Model):
         else:
             print("-> Opción inválida")
         
-
-from controller import Controller # Para programa con interfaz
-
 if __name__ == '__main__':
-    # df_estudiantes = pd.read_csv("docs//students.csv", encoding="latin1")
-    # print(df_estudiantes)
-
-    ############################################
-    main()
-    ############################################
-    # system = Controller()
-    # system.main()
+    main()    
