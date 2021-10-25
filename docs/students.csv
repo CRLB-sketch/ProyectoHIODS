@@ -1,3 +1,4 @@
-nombre,apellido,correo,numero
-cristian,laynez,cristianlb@gmail.com,12345612
-gaspar,santiago,gasparnaruto@gmail.com,1074894
+nombre,apellido,correo,numero,tipo_ayuda_buscada
+cristian,laynez,cristianlb@gmail.com,12345612,beca_completa
+gaspar,santiago,gasparnaruto@gmail.com,1074894,beca_parcial
+nelson,simpson,nelson@gmail.com,123456789,no_necesita_ayuda
