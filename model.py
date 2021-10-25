@@ -72,9 +72,9 @@ class Model:
     def add_new_donnation(self, donation : Donation):
         new_registry = {
             "name" : donation.name,
-            "email" : donation.name,
-            "donated_money" : donation.name,
-            "others_donated" : donation.name,
+            "email" : donation.email,
+            "donated_money" : donation.donated_money,
+            "others_donated" : donation.others_donated,
         }
 
         self.df_donations = self.df_donations.append(new_registry, ignore_index=True)

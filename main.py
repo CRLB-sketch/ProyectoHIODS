@@ -113,18 +113,19 @@ def main():
 
             # Ingresar la cantidad de denero que desea donar (si el usuario quiere)
             money = 0
-            money_option = ""
-            while money_option != "Q":
+            valid = False
+            while not valid:
                 money_option = input("Porfavor ingrese la cantidad de dinero que desee (si no desea/puede ingresar dinero presiona Q): ").upper()
 
                 if money_option == "Q":
+                    valid = True
                     print("\nContinuemos\n")
                 elif money_option.isdigit():
                     if int(money_option) <= 0:
                         print("\n-> Solamente debes ingresar números positivos\n")
                     else:
                         money = int(money_option)
-                        money_option = "Q"
+                        valid = True
                 else:
                     if len(money_option) == 0:
                         print("\nNo ingresaste ningun dato\n")
@@ -141,6 +142,7 @@ def main():
                     print("\nPorfavor ingrese una opción o un elemento a donar\n")
                 elif element == "Q":
                     print("\nContinuemos\n")
+                    valid = True
                 else:
                     objects_donated += element + "+"
 
